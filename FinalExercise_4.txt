@@ -1,0 +1,172 @@
+CYBV 470 System Programming + Unix
+
+
+Description
+-----------
+There are 10 questions, each worth 10 points, for a total of 100 points toward your final exercise grade.
+
+Instructions
+------------
+Use this document as your answer sheet to complete the exercise.  
+
+When completed, submit your completed answer to the D2L Assignments page as your final exercise. 
+
+Questions
+---------
+
+1.	Which of the following statements is incorrect and why? 
+
+a)	if (x >= y)  printf(“%d\n”, x);
+
+b)	if (x <= y)  printf(“%d\n”, x);
+
+c)	if (x ><= y) printf(“%d\n”, x);
+
+d)	if (x == y)  printf(“%d\n”, x);
+
+
+Answer: C is incorrect because ><= won't work and would be an invalid line in C. '<' and '>' have to be used separately and can't be combined together.
+
+
+2.	Identify the character or value specified by the array index based on the following declaration:
+
+	char array[21] = "Programming is easy!";
+
+	Example:  array[6]
+
+ 	Answer: m
+
+A. array[8]
+
+Answer: i
+
+B. array[0]
+
+Answer: P
+
+C. array[7]
+
+Answer: n
+
+D. array[4]
+
+Answer: r 
+
+E. array[20]
+
+Answer: !
+
+
+3.	What is the difference between Call by Value and Call by Reference when calling a function with parameters and how are the conventions handled in C?  If it’s helpful, provide an example illustrating the difference.
+
+Answer: Call by Value is when a copy of the parameters value is passed on to the function and a Call by Reference is when the memory address of the parameter is passed to the function. 
+For Call by Value, handling automatically occurs unless pointers are used. For Call by Reference, handling is done manually by passing pointers.
+
+
+
+
+4.	Replace the following for loop with the equivalent implementation using a while loop:
+
+for (i=1; i<=148; i++)
+    printf ("%d\n", i + i);
+
+Answer:
+i = 1;
+while (i <= 148) {
+    printf("%d\n", i + i);
+    i++;
+}
+
+
+
+5.	Consider the following code segment (assuming this is run on a 32-bit machine):
+
+    int x = 2147483647;
+    x += 23;
+    printf("%d\n", x);
+
+What value is printed for x?  Explain the reason for the value.  Hint: write a small program if it helps you find the answer.
+
+Answer: -2147483626, A negative range occurs because of an integer overflow (two's complement arithmetic).
+Short program:
+#include <stdio.h>
+
+int main() {
+    int x = 2147483647; // Max value
+    x += 23;            // overflow occurs here
+    printf("The value of x is: %d\n", x); // Print result
+    return 0;
+}
+
+6.	Answer TRUE or FALSE for the following two questions about Blocking and Non-Blocking programs:
+
+A.	In a program using blocking Input/Output, the program is put to sleep while waiting for input.
+
+Answer: True
+
+B.	In a program using non-blocking Input/Output, the read() function will wait until data is available and return the data that was read.
+
+Answer: False
+
+
+
+
+7.	Select the answer that best defines a Thread:
+
+A.	An independent executing entity with its own separate memory space
+
+B.	An independent executing entity which shares all of its memory with other similar executing entities
+
+Answer: B.
+
+
+8.	A semaphore is:
+
+a)	A First In First Out Queue
+b)	A resource counting integer whose value can never be less than 0
+c)	A Last In First Out Stack
+d)	An integer value that always has a value of 0
+
+Answer: B.
+
+
+9.	What is wrong with the following sequence of code statements:
+ 
+	char myString[6];
+	strcpy(myString, “ABCDEF”);
+	printf(“%s”, myString);
+
+Answer: The problem here is that a buffer overflow will occur. 'myString' has a set size of 6, but in order to store "ABCDEF" you need 7 bytes, not 6.
+
+
+10.	Consider the following simple program and then answer the question below:
+
+
+#include <stdio.h>
+
+#pragma pack(1)
+typedef struct employee_struct
+{
+    int id;
+    char first_name[40];
+    char last_name[40];
+    char hire_date[32];
+} Employee;
+
+int main()
+{
+    Employee employees[25];
+    Employee *pE1 = employees;
+    Employee *pE2 = employees;
+
+    pE2++;
+
+    printf("%lu\n", (unsigned long)pE2 - (unsigned long)pE1);
+    
+    return 0;
+}
+
+
+What value is printed by the printf() statement?  Explain your answer.
+
+Answer: The value printed by the printf() statement is; 116. 116 is printed because the Employee structure size is 116 bytes [40 + 40 + 32 + 4 (int is 4 bytes)] = 116
